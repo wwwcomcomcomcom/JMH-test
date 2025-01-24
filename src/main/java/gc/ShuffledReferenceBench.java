@@ -19,7 +19,10 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgsAppend = {"-Xms8g", "-Xmx8g", "-Xmn7g" })
-public class ArrayWalkBench {
+/**
+ *
+ */
+public class ShuffledReferenceBench {
 
     @Param({"16", "256", "4096", "65536", "1048576", "16777216"})
     int size;
@@ -58,7 +61,7 @@ public class ArrayWalkBench {
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(ArrayWalkBench.class.getSimpleName())
+                .include(ShuffledReferenceBench.class.getSimpleName())
                 .build();
         new Runner(opt).run();
     }
