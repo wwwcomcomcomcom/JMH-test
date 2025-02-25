@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1, jvmArgsAppend = {"-Xms8g", "-Xmx8g", "-Xmn7g" })
+@Fork(value = 1, jvmArgsAppend = {"-Xms8g", "-Xmx8g", "-Xmn7g", "-XX:+UseParallelGC" })
 public class ArrayWalkBench {
 
     @Param({"16", "256", "4096", "65536", "1048576", "16777216"})
@@ -39,7 +39,7 @@ public class ArrayWalkBench {
             arr[c] = "Value" + c;
         }
         if (shuffle) {
-            Collections.shuffle(Arrays.asList(arr), new Random(0xAABBCC));
+            Collections.shuffle(Arrays.asList(arr), new Random());
         }
         if (gc) {
             for (int c = 0; c < 5; c++) {
